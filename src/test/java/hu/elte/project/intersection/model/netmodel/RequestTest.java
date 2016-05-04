@@ -1,39 +1,18 @@
 package hu.elte.project.intersection.model.netmodel;
 
-import hu.elte.project.intersection.*;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
+import org.junit.Ignore;
+import static org.junit.Assert.*;
 
 /**
  * Unit test for simple App.
  */
-public class RequestTest 
-    extends TestCase
-{
+public class RequestTest{
     /**
-     * Create the test case
-     *
-     * @param testName name of the test case
+     * Create the test
      */
-    public RequestTest( String testName )
+    @Ignore @Test public void testIntersection()
     {
-        super( testName );
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( RequestTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+        assertTrue(true);
     }
 }

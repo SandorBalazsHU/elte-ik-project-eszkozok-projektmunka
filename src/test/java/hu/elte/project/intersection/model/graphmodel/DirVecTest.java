@@ -1,43 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.elte.project.intersection.model.graphmodel;
 
-import static junit.framework.Assert.assertTrue;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
+import org.junit.Ignore;
+import static org.junit.Assert.*;
 
 /**
- *
- * @author sandorbalazs
+ * Unit test for simple App.
  */
-public class DirVecTest extends TestCase {
+public class DirVecTest{
     /**
-     * Create the test case
-     *
-     * @param testName name of the test case
+     * Create the test
      */
-    public DirVecTest( String testName )
+    @Ignore @Test public void testIntersection()
     {
-        super( testName );
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( DirVecTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+        assertTrue(true);
     }
 }

@@ -1,8 +1,8 @@
 package hu.elte.project.intersection;
 
 /**
- * Hello world!
- *
+ * {@docRoot}
+ * Lali?????
  */
 public class Intersection 
 {

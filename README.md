@@ -1,0 +1,1 @@
+Az ELTE IK Projekt Eszközök tárgyához készülõ beadandó feladat.
