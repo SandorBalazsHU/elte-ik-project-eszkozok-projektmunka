@@ -1,13 +1,16 @@
 package hu.elte.project.intersection;
 
+import hu.elte.project.intersection.controll.ControllSequence;
+
 /**
  * {@docRoot}
- * Lali?????
+ * 
  */
 public class Intersection 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        ControllSequence program = new ControllSequence();
+        program.start();
     }
 }

@@ -40,20 +40,23 @@ public final class Logger {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger("intersectionLog"); 
     
     /**
-     * Osztályszintű változó a fájlkezeléshez.
+     * Osztályszintű változó a <b>fájlkezeléshez</b>.
      */
     private static FileHandler fh;
     
     /**
-     * Beépített formázó logokhoz.
+     * Beépített <b>formázó</b> logokhoz.
      */
     private static final SimpleFormatter formatter = new SimpleFormatter();
     
     /**
-     * Ha a level paraméter warning akkor warning ha bármimmás akkor info
-     * Nem írjuk konzolra a hibákat
+     * <b>A napló író metódus</b>
+     * Azért van rá szügség, hogy <b>elfedhesük</b> a felhasználó szeme elől a hibákat.
+     * Képes <b>többféle</b> naplóbejegyzést készíteni a <b>STRING_LOG_FILE_PATH</b> ban megadott fájlba.
+     * Ha a fájl nem létezik akkor <b>létrehozza</b> azt és onnantól abba dolgozik.
+     * <b>Nem törli</b> a korábbi naplóbejegyzéseket.
      * 
-     * A lehetséges gyári JAVA log szintek:
+     * A lehetséges <b>gyári JAVA</b> log szintek:
      * <ol>
      *  <li>SEVERE (highest value)</li>
      *  <li>WARNING</li>
@@ -64,7 +67,7 @@ public final class Logger {
      *  <li>FINEST (lowest value)</li>
      * </ol>
      * 
-     * A következő két log szint ülön is kiadható:
+     * A következő két log szint <b>ülön</b> is kiadható:
      * <ol>
      *  <li>info</li>
      *  <li>warning</li>
@@ -103,7 +106,7 @@ public final class Logger {
     }
     
     /**
-     * Csak egy paraméterrel hívva info-t ír (Rekurzívan a kódismétlés kerülése miatt)
+     * Csak egy paraméterrel hívva <b>info</b>-t ír (Rekurzívan a kódismétlés kerülése miatt)
      * 
      * @param inLog Magát a naplóbejegyzést kell megadni.
      */
@@ -112,7 +115,7 @@ public final class Logger {
     }
     
     /**
-     * Kívétel adható neki amit lelogol warning ként! (Rekurzívan a kódismétlés kerülése miatt)
+     * <b>Kívétel</b> adható neki amit lelogol <b>warning</b> ként! (Rekurzívan a kódismétlés kerülése miatt)
      * 
      * @param inLog Egy kivételt vár paraméterül amit naplóz.
      */
@@ -121,12 +124,12 @@ public final class Logger {
     }
     
     /**
-     * Képes szöveggé alakítani egy stackTrace-t.
+     * Képes <b>szöveggé</b> alakítani egy stackTrace-t.
      * 
      * @param ex A szöveggé alakítandó kivételt várja.
      * @return A megadott kivételt adja vissza szövegesen.
      */
-    protected static String stackTracePrint(Exception ex){
+    public static String stackTracePrint(Exception ex){
         String stackTrace = "";
         StackTraceElement[] tmp = ex.getStackTrace();
         for (StackTraceElement e: tmp){

@@ -8,7 +8,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
     <name>intersection</name>
     <url>http://sandorbalazs.web.elte.hu/intersection</url>
     <build>
-        <!-- Build könyvtár -->
+        <!-- Build k�nyvt�r -->
         <outputDirectory>${project.build.directory}/maven/build</outputDirectory>
         <plugins>
             <!-- compiler-plugin -->
@@ -29,26 +29,36 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-            <!-- JavaDoc -->
+            <!-- JavaDoc
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.10.3</version>
                 <configuration>
-                    <!-- Dokumentáció könyvtára -->
-                    <outputDirectory>${project.build.directory}/documentation</outputDirectory>
+                    
+                    <outputDirectory>${project.build.directory}/documentation/apiDocs</outputDirectory>
+                    <javadocDirectory>${project.build.directory}/documentation/apiDocs</javadocDirectory>
+                    <testJavadocDirectory>${project.build.directory}/documentation/testDocs</testJavadocDirectory>
+                    <jarOutputDirectory>${project.build.directory}/documentation/jar</jarOutputDirectory>
                     <show>private</show>
+                        <doctitle>Intersection project dokument�ci� - ${project.version}</doctitle>
+                        <windowtitle>Intersection project dokument�ci� - ${project.version}</windowtitle>
+                        <testDoctitle>Intersection project teszt dokument�ci� - ${project.version}</testDoctitle>
+                        <testWindowtitle>Intersection project teszt dokument�ci� - ${project.version}</testWindowtitle>
                 </configuration>
                 <executions>
                     <execution>
                     <id>attach-javadocs</id>
                             <goals>
+                                    <goal>javadoc</goal>
+                                    <goal>test-javadoc</goal>
                                     <goal>jar</goal>
+                                    <goal>test-jar</goal>
                             </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <!-- Reportok helyének beállítása, arakterkódolás UTF-8, tesztek mappabeállítása-->
+            </plugin>-->
+            <!-- Reportok hely�nek be�ll�t�sa, arakterk�dol�s UTF-8, tesztek mappabe�ll�t�sa-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

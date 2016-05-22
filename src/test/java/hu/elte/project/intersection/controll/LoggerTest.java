@@ -13,16 +13,21 @@ import org.junit.Test;
 
 
 /**
- * Unit teszt a hu.elte.project.intersection.controll.Logger osztályhoz.
+ * Unit teszt a hu.elte.project.intersection.controll.<b>Logger</b> osztályhoz.
  * @author  <b>Sándor Balázs</b> - <b>Bognár Dániel</b> - <b>Kiss Erik</b>
  * @version 1.0
  * @since   2016-05-04
  */
 public class LoggerTest{
+    
     /**
-     * testLogger - Teszt 1 - Létezik-e a Logger osztály?
+     * Konstans a tesztek <b>időtúllépésének</b> beállításához.
      */
-    @Test(timeout=100) public void TestLoggerClassExists()
+    private final int testTimeOut = 500;
+    /**
+     * testLogger - Teszt 1 - <b>Létezik-e</b> a Logger osztály?
+     */
+    @Test(timeout=testTimeOut) public void TestLoggerClassExists()
     {
         try {
             Class.forName("hu.elte.project.intersection.controll.Logger");
@@ -33,9 +38,9 @@ public class LoggerTest{
     }
     
     /**
-     * testLogger - Teszt 2 - A writeLog metódust meghívva létrejön e a logfile ha nem létezik.
+     * testLogger - Teszt 2 - A writeLog metódust meghívva <b>létrejön-e a logfile</b> ha nem létezett korábban.
      */
-    @Test(timeout=100) public void testLoggerWriteLogFileExits()
+    @Test(timeout=testTimeOut) public void testLoggerWriteLogFileExits()
     {
         Logger.writeLog("TestLog");
         
@@ -51,9 +56,9 @@ public class LoggerTest{
     }
     
     /**
-    * testLogger - Teszt 3 - A writeLog metódus felülírja-e a már létező logokat?.
+    * testLogger - Teszt 3 - A writeLog metódus <b>felülírja-e</b> a már létező logokat?.
     */
-    @Test(timeout=100) public void testLoggerWriteLogFileOverwrite()
+    @Test(timeout=testTimeOut) public void testLoggerWriteLogFileOverwrite()
     {
         String testLog01 = "TestLog01";
         String testLog02 = "TestLog02";
@@ -73,10 +78,10 @@ public class LoggerTest{
     }
 
      /**
-     * testLogger - Teszt 4 - A writeLog(String level, String inLog) helyes adatokat ír ki a logfile-ba?
+     * testLogger - Teszt 4 - A writeLog(String level, String inLog) <b>helyes</b> adatokat ír ki a logfile-ba?
      * A messages listával konfigurálhatók a tesztelendő típusok.
      */
-    @Test(timeout=100) public void testLoggerWriteLog()
+    @Test(timeout=testTimeOut) public void testLoggerWriteLog()
     {
         String testLogText = "TestLog_";
         List<String> messages = Arrays.asList("info", "warning", "SEVERE", "WARNING", "INFO", "CONFIG", "FINE", "FINER", "FINEST");
@@ -99,9 +104,9 @@ public class LoggerTest{
     }
     
      /**
-     * testLogger - Teszt 5 - A writeLog(String inLog) helyes adatokat ír ki a logfile-ba?
+     * testLogger - Teszt 5 - A writeLog(String inLog) <b>helyes</b> adatokat ír ki a logfile-ba?
      */
-    @Test(timeout=100) public void testLoggerWriteString()
+    @Test(timeout=testTimeOut) public void testLoggerWriteString()
     {
         String testLogText = "TestLog";
         Logger.writeLog(testLogText);
@@ -117,9 +122,9 @@ public class LoggerTest{
     }
     
      /**
-     * testLogger - Teszt 6 - A writeLog(Exception inLog) helyes adatokat ír ki a logfile-ba?
+     * testLogger - Teszt 6 - A writeLog(Exception inLog) <b>helyes</b> adatokat ír ki a logfile-ba?
      */
-    @Test(timeout=100) public void testLoggerWriteException()
+    @Test(timeout=testTimeOut) public void testLoggerWriteException()
     {
         try{
             throw new NullPointerException();
@@ -139,7 +144,7 @@ public class LoggerTest{
     }
 
     /**
-     * Törli a logfilet. Azért szügséges, hogy a tesztek függetlenek maradhassanak egymástól.
+     * <b>Törli a logfilet.</b> Azért szügséges, hogy a tesztek <b>függetlenek</b> maradhassanak egymástól.
      */
     private void deleteLogFile() {
         try{
