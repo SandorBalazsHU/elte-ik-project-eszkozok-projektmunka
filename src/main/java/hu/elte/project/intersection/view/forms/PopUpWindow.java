@@ -1,4 +1,4 @@
-package hu.elte.project.intersection.view;
+package hu.elte.project.intersection.view.forms;
 
 import hu.elte.project.intersection.controll.Logger;
 import javax.swing.JOptionPane;

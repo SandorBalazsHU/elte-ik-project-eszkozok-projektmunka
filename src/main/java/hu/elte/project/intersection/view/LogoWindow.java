@@ -5,6 +5,7 @@
  */
 package hu.elte.project.intersection.view;
 
+import hu.elte.project.intersection.view.forms.PopUpWindow;
 import hu.elte.project.intersection.controll.Logger;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;

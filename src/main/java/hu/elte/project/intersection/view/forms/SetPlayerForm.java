@@ -6,7 +6,6 @@
 package hu.elte.project.intersection.view.forms;
 
 import hu.elte.project.intersection.view.VerticalFlowLayout;
-import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -17,7 +16,6 @@ import java.awt.Graphics;
 
 import javax.swing.JColorChooser;
 import javax.swing.JComponent;
-import javax.swing.border.EmptyBorder;
 import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -40,7 +38,6 @@ class SetPlayerForm extends JPanel {
         add(playerNameField);
         
         final MyPreviewPanel pre = new MyPreviewPanel(colorChooser);
-        //colorChooser.setPreferredSize(new Dimension(400, 300));
         colorChooser.setPreviewPanel(pre);
         ColorSelectionModel model = colorChooser.getSelectionModel();
         model.addChangeListener(new ChangeListener() {
@@ -53,7 +50,7 @@ class SetPlayerForm extends JPanel {
     }
     
     public String getPlayerName(){
-        return playerNameField.getText();
+        return playerNameField.getSelectedText();
     }
     
     public Color getColor(){

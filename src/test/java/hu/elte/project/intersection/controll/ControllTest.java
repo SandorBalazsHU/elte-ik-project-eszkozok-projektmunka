@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 /**
  * Unit test for simple App.
  */
-public class ControllSequenceTest{
+public class ControllTest{
     /**
      * Create the test
      */

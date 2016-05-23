@@ -5,6 +5,7 @@
  */
 package hu.elte.project.intersection.model;
 
+import hu.elte.project.intersection.model.graphmodel.CKey;
 import java.awt.Color;
 
 /**
@@ -16,12 +17,26 @@ public class Player {
     private final Color color;
     private int xp;
     private boolean isLive;
+    private boolean isRemoteUser;
+    private CKey controllKey;
     
-    public Player(String name, Color color){
+    public Player(String name, Color color, boolean isRemoteUser){
         this.name = name;
         this.color = color;
         this.xp = 0;
         this.isLive = true;
+        this.isRemoteUser = isRemoteUser;
+    }
+    
+    public boolean setControllKey(CKey c){
+        if(!this.isRemoteUser){
+            this.controllKey = c;
+        }
+        return !this.isRemoteUser;
+    }
+    
+    public CKey getControllKey(){
+        return controllKey;
     }
     
     public String getName(){
@@ -51,5 +66,9 @@ public class Player {
     
     protected void kill(){
         isLive = false;
+    }
+    
+    public boolean isRemoteUser(){
+        return isRemoteUser;
     }
 }

@@ -5,7 +5,7 @@
  */
 package hu.elte.project.intersection.view;
 
-import hu.elte.project.intersection.graphModel.VPlayer;
+import hu.elte.project.intersection.model.graphModel.VPlayer;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;

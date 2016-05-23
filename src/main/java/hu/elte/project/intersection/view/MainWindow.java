@@ -5,27 +5,25 @@
  */
 package hu.elte.project.intersection.view;
 
-import hu.elte.project.intersection.controll.Logger;
+import hu.elte.project.intersection.controll.viewcontroll.View;
 import hu.elte.project.intersection.view.forms.LocalGameForm;
+import hu.elte.project.intersection.view.forms.ScoreBoard;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
 /**
@@ -39,13 +37,16 @@ private JPanel topPanel = new JPanel(new GridLayout(1,5));
     private final JPanel leftPanel = new JPanel(new VerticalFlowLayout());
     private final JPanel rightPanel = new JPanel(new FlowLayout());
     private final JPanel bottomPanel = new JPanel(new GridLayout(1,5));
-    private final JPanel centerPanel = new JPanel(new GridLayout(1,1));
+    public final JPanel centerPanel = new JPanel(new VerticalFlowLayout());
     private final JMenuBar menuBar = new JMenuBar();
-    private final JToolBar playersMenu = new JToolBar("Still draggable");
-    public DrawFrame gamePanel;
-    private LocalGameForm localGameStartForm = new LocalGameForm(this);
+    public GamePanel gamePanel;
+    public LocalGameForm localGameForm;
+    private final View view;
+    public ScoreBoard scoreBoardnew = new ScoreBoard();
     
-    public MainWindow(){
+    public MainWindow(View view){
+        this.view = view;
+        localGameForm = new LocalGameForm(this, view);
         //Általános beállítások!
         setTitle("Intersection!");
         setLayout(new BorderLayout(4, 4));
@@ -58,11 +59,11 @@ private JPanel topPanel = new JPanel(new GridLayout(1,5));
         //Menü hozzáadásaű
         setJMenuBar(createMenuBar());
         
-        //Eszköztár hozzáadása a bal panelhez
-        //JToolBar playersToolbar = createPlayersToolbar();
-        //leftPanel.add(playersToolbar);
+        //(int top, int left, int bottom, int right)
+        scoreBoardnew.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        leftPanel.add(scoreBoardnew);
         
-        gamePanel = new DrawFrame();
+        gamePanel = new GamePanel();
         gamePanel.setPreferredSize(new Dimension(800, 600));
         
         gamePanel.addKeyListener(gamePanel);
@@ -75,11 +76,11 @@ private JPanel topPanel = new JPanel(new GridLayout(1,5));
         add(bottomPanel, BorderLayout.PAGE_END);
         add(centerPanel, BorderLayout.CENTER);
         
-        add(gamePanel, BorderLayout.CENTER);
+        centerPanel.add(gamePanel);
         gamePanel.setVisible(false);
 
-        add(localGameStartForm, BorderLayout.CENTER);
-        localGameStartForm.setVisible(false);
+        centerPanel.add(localGameForm);
+        localGameForm.setVisible(false);
         
         //Kilépés esetén ne csináljon semmit majd a saját eseménykezelő elintézi!
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -89,7 +90,7 @@ private JPanel topPanel = new JPanel(new GridLayout(1,5));
         addWindowStateListener(new WindowStateListener() {
             @Override
             public void windowStateChanged(WindowEvent e) {
-                if(localGameStartForm.isVisible()) localGameStartForm.PanelRepaint();
+                if(localGameForm.isVisible()) localGameForm.PanelRepaint();
             }
         });
     }
@@ -197,88 +198,14 @@ private JPanel topPanel = new JPanel(new GridLayout(1,5));
         
         return menuBar;
     }
-    
-    //A fő eszköztár elékészítése
-    private JToolBar createPlayersToolbar(){
-        playersMenu.setName("Players");
-        playersMenu.setAutoscrolls(true);
-        GridLayout lay = new GridLayout(4,2,1,3);
-        playersMenu.setLayout(lay);
-        playersMenu.setOrientation(JToolBar.VERTICAL);
-        playersMenu.setMargin(new Insets(10, 2, 2, 2));
-        /*JButton button = null;
 
-        button = makeNavigationButton("VerticalRoad", "VerticalRoad","Függőleges út","Függőleges út");
-        button.addActionListener(this); button.setActionCommand("groundRoadVertical");
-        playersMenu.add(button);
-
-        button = makeNavigationButton("HorizontalRoad", "HorizontalRoad","Vízszintes út","Vízszintes út");
-        button.addActionListener(this); button.setActionCommand("groundRoadHorizontal");
-        playersMenu.add(button);
-
-        button = makeNavigationButton("RightBottomRoad", "RightBottomRoad","Jobb kanyar","Jobb kanyar le");
-        button.addActionListener(this); button.setActionCommand("groundRoadRightBottom");
-        playersMenu.add(button);
-
-        button = makeNavigationButton("LeftBottomRoad", "LeftBottomRoad","Bal kanyar","Bal kanyar le");
-        button.addActionListener(this); button.setActionCommand("groundRoadLeftBottom");
-        playersMenu.add(button);
-
-        button = makeNavigationButton("RightTopRoad", "RightTopRoad","Jobb kanyar","Jobb kanyar fel");
-        button.addActionListener(this); button.setActionCommand("groundRoadRightTop");
-        playersMenu.add(button);
-        
-        button = makeNavigationButton("LeftTopRoad", "LeftTopRoad","Bal kanyar","Bal kanyar fel");
-        button.addActionListener(this); button.setActionCommand("groundRoadLeftTop");
-        playersMenu.add(button);
-
-        button = makeNavigationButton("CrossRoad", "CrossRoad","Kereszteződés","Kereszteződés");
-        button.addActionListener(this); button.setActionCommand("groundRoadCross");
-        playersMenu.add(button);
-        
-        button = makeNavigationButton("info", "info","Inforbáció","Inforbáció");
-        button.addActionListener(this); button.setActionCommand("info");
-        playersMenu.add(button);*/
-
-        return playersMenu;
-    }
-    /*protected JButton makeNavigationButton(String imageName, String actionCommand,
-                                           String toolTipText,
-                                           String altText) {
-        //Look for the image.
-        String imgLocation = "TempFiles/ViewImages/buttons/"+ imageName+ ".jpg";
-       
-        //Create and initialize the button.
-        JButton button = new JButton();
-        button.setActionCommand(actionCommand);
-        button.setToolTipText(toolTipText);
-        ImageIcon icon = new ImageIcon(imgLocation, altText); 
-        if (icon != null){
-            button.setIcon(icon);
-        } else {
-            button.setText(altText);
-            Logger.writeLog("warning", "Resource not found: "+ imgLocation);
-        }
-
-        return button;
-    }*/
-    
     //ESEMÉNYKEZELÉS
     @Override
     public void actionPerformed(ActionEvent e)
     {
         String cmd = e.getActionCommand();
-        /*if(cmd.contains("Road")){ Game.mousePickStatus = cmd; }
-        if(cmd.contains("info")){ Game.mousePickStatus = "info"; }*/
         if(cmd.contains("local_game_open")){
-            centerPanel.setVisible(false);
-            localGameStartForm.setVisible(true);
-            /*gamePanel.setVisible(true);
-            gamePanel.setFocusable(true);
-            gamePanel.requestFocus();
-            gamePanel.requestFocusInWindow();
-            gamePanel.timer.start();*/
+            view.showLocalGameForm();
         }
-        //System.out.println("Selected: " + e.getActionCommand());
     }
 }

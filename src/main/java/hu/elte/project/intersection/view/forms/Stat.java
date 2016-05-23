@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.project.intersection.view;
+package hu.elte.project.intersection.view.forms;
 
 /**
  *
  * @author sandorbalazs
  */
-public class PlayingField {
+public class Stat {
     
 }

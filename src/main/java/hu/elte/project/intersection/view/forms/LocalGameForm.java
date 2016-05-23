@@ -5,8 +5,7 @@
  */
 package hu.elte.project.intersection.view.forms;
 
-import hu.elte.project.intersection.model.Game;
-import hu.elte.project.intersection.model.Player;
+import hu.elte.project.intersection.controll.viewcontroll.View;
 import hu.elte.project.intersection.view.VerticalFlowLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -34,19 +33,20 @@ import javax.swing.border.EmptyBorder;
  * @author sandorbalazs
  */
 public class LocalGameForm extends JPanel implements ActionListener{
-    private JPanel getUsersNumberForm = new  JPanel();
-    private JPanel getUsersForm = new  JPanel();
+    public JPanel getUsersNumberForm = new  JPanel();
+    public JPanel getUsersForm = new  JPanel();
     private JButton generateGetUsersForm = new JButton("OK");
     private JButton startGame = new JButton("START");
-    private Game game = new Game();
     private ArrayList<SetPlayerForm> setPlayerForms = new ArrayList<SetPlayerForm>();
     private JSpinner playersNumberSpinner;
     private JScrollPane scrollFrameForGetUsersForm = new JScrollPane(getUsersForm);
     private final static int playersNumberLimit = 5;
     private JLabel panelTittleLabel = new JLabel("Új helyi többszemélyes játék indítása.");
     private JFrame parentFrame;
+    private final View view;
     
-    public LocalGameForm(JFrame parentFrame){   
+    public LocalGameForm(JFrame parentFrame, View view){
+        this.view = view;
         this.parentFrame = parentFrame;
         setLayout(new VerticalFlowLayout());
         panelTittleLabel.setFont(new Font("Plain", Font.BOLD, 22));
@@ -95,7 +95,7 @@ public class LocalGameForm extends JPanel implements ActionListener{
         return getUsersNumberForm;
     }
     
-    private JPanel generateGetUsersForm(int playersNumber){
+    public JPanel generateGetUsersForm(int playersNumber){
         getUsersForm.setLayout(new VerticalFlowLayout());
         
         for(int i = 0; i < playersNumber; ++i){
@@ -122,13 +122,14 @@ public class LocalGameForm extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         String cmd = e.getActionCommand();
         if(cmd.contains("set_players_number")){
-            generateGetUsersForm((Integer) playersNumberSpinner.getValue()).setVisible(true);
-            getUsersForm.revalidate();
-            getUsersForm.repaint();
-            getUsersNumberForm.setVisible(false);
-            PanelRepaint();
+            view.initLocalGame((Integer) playersNumberSpinner.getValue());
         }
         if(cmd.contains("start_game")){
+            for (SetPlayerForm f : setPlayerForms) {
+                view.addPlayer(f.getName(), f.getColor(), false);
+                System.out.println(f.getName() + ", " + f.getColor());
+            }
+            view.startLocalGame();
         }
     }
     

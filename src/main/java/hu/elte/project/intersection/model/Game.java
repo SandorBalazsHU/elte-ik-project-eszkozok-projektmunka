@@ -16,7 +16,7 @@ public class Game {
     public Game(){
         players = new ArrayList<Player>();
     }
-    public void addPlayerr(Player p){
+    public void addPlayer(Player p){
         players.add(p);
     }
     public int getPlayersNumber(){

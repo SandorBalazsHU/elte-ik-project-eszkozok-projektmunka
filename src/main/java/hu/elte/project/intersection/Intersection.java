@@ -1,6 +1,6 @@
 package hu.elte.project.intersection;
 
-import hu.elte.project.intersection.controll.ControllSequence;
+import hu.elte.project.intersection.controll.Controll;
 
 /**
  * {@docRoot}
@@ -8,9 +8,9 @@ import hu.elte.project.intersection.controll.ControllSequence;
  */
 public class Intersection 
 {
+    private static final Controll program = new Controll();
     public static void main( String[] args )
     {
-        ControllSequence program = new ControllSequence();
         program.start();
     }
 }

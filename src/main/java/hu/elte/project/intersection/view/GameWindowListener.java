@@ -1,6 +1,7 @@
 
 package hu.elte.project.intersection.view;
 
+import hu.elte.project.intersection.view.forms.PopUpWindow;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
