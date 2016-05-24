@@ -13,19 +13,26 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 
 /**
  *
  * @author sandorbalazs
  */
-public class ScoreBoardItem extends JPanel{
+public class ScoreBoardItem extends JPanel implements ActionListener{
     private JLabel playerName;
     private JPanel playerColor;
     private JLabel playerKeys;
     protected JLabel playerXP;
     private JPanel box;
+    private Player player;
+    public JButton actionButton = new JButton();
     
     public ScoreBoardItem(Player player) {
+        this.player = player;
+        
         setLayout(new VerticalFlowLayout());
         
         playerName = new JLabel("  " + player.getName());
@@ -47,5 +54,15 @@ public class ScoreBoardItem extends JPanel{
         box.add(playerXP);
         
         add(box);
+        
+        actionButton.setVisible(false);
+        actionButton.addActionListener(this);
+        actionButton.setActionCommand("refresh_xp");
+        add(actionButton);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().contains("refresh_xp")) playerXP.setText(player.getXP() + " Pont");
     }
 }

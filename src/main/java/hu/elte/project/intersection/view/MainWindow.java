@@ -44,6 +44,8 @@ private JPanel topPanel = new JPanel(new GridLayout(1,5));
     public LocalGameForm localGameForm;
     private final View view;
     public ScoreBoard scoreBoard = new ScoreBoard();
+    public LogoPanel logoPanel = new LogoPanel();
+    public FlowLayout centwrPanelLayout = new FlowLayout(FlowLayout.CENTER);
     
     public MainWindow(View view){
         this.view = view;
@@ -76,7 +78,10 @@ private JPanel topPanel = new JPanel(new GridLayout(1,5));
         add(rightPanel, BorderLayout.LINE_END);
         add(leftPanel, BorderLayout.LINE_START);
         add(bottomPanel, BorderLayout.PAGE_END);
+        centerPanel.setLayout(centwrPanelLayout);
         add(centerPanel, BorderLayout.CENTER);
+        
+        centerPanel.add(logoPanel);
         
         centerPanel.add(gamePanel);
         gamePanel.setVisible(false);
@@ -109,43 +114,13 @@ private JPanel topPanel = new JPanel(new GridLayout(1,5));
         if(fileIcon != null){menu.setIcon(fileIcon);}
         menuBar.add(menu);
         
-        //Egyjátékos mód
-        ImageIcon singleGameIcon = new ImageIcon("TempFiles/ViewImages/Icons/singlePlayer.png");
-        menuItem = new JMenuItem("Egyjátékos mód", singleGameIcon);
-        menuItem.setMnemonic(KeyEvent.VK_E);
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Új játék indítása!");
-        menuItem.setActionCommand("single_game_open");
-        menuItem.addActionListener(this);
-        menu.add(menuItem);
-        
         //Helyi játék
         ImageIcon localGameIcon = new ImageIcon("TempFiles/ViewImages/Icons/localGame.png");
-        menuItem = new JMenuItem("Helyi játék", localGameIcon);
+        menuItem = new JMenuItem("Új játék indítása", localGameIcon);
         menuItem.setMnemonic(KeyEvent.VK_H);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Többszemélyes helyi játék indítása!");
         menuItem.setActionCommand("local_game_open");
-        menuItem.addActionListener(this);
-        menu.add(menuItem);
-        
-        //Új szerver
-        ImageIcon newServerIcon = new ImageIcon("TempFiles/ViewImages/Icons/fileIcon.png");
-        menuItem = new JMenuItem("Új szerver indítása", newServerIcon);
-        menuItem.setMnemonic(KeyEvent.VK_U);
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Új saját játékszerver indítása");
-        menuItem.setActionCommand("new_server_start");
-        menuItem.addActionListener(this);
-        menu.add(menuItem);
-        
-        //Csatlakozás
-        ImageIcon connectIcon = new ImageIcon("TempFiles/ViewImages/Icons/connect.png");
-        menuItem = new JMenuItem("Csatlakozás", connectIcon);
-        menuItem.setMnemonic(KeyEvent.VK_C);
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Csatlakozás egy futó játékszerverhez");
-        menuItem.setActionCommand("connect_to_game");
         menuItem.addActionListener(this);
         menu.add(menuItem);
         

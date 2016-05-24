@@ -8,6 +8,8 @@ package hu.elte.project.intersection.view.forms;
 import hu.elte.project.intersection.model.Game;
 import hu.elte.project.intersection.view.VerticalFlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -35,18 +37,9 @@ public class ScoreBoard extends JPanel{
             add(newScoreBoardItem);
         }
     }
-    public void repaintME(){
-        
+    public void repaintME(){    
         for (int i = 0; i < game.getPlayersNumber(); ++i){
-            items.get(i).playerXP = new JLabel(game.getPlayer(i).getXP() + " Pont");
-            
-            items.get(i).playerXP.revalidate();
-            items.get(i).playerXP.updateUI();
-            items.get(i).playerXP.repaint();
-            
-            items.get(i).revalidate();
-            items.get(i).updateUI();
-            items.get(i).repaint();
+            items.get(i).actionButton.doClick(0);
         }
     }
 }

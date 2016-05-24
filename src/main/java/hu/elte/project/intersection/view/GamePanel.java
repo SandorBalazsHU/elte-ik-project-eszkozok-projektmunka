@@ -24,18 +24,29 @@ import java.util.concurrent.Future;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * <h1>A játéktér</h1>
+ * A játék magja egy átalakított JPanel,
+ * mely stabil FPS-el képes 2d alakzatokat dinamikusan megjeleníteni.
+ * 
+ * @author  <b>Sándor Balázs</b> - <b>Bognár Dániel</b> - <b>Kiss Erik</b>
+ * @version 1.0
+ * @since   2016-05-03 
+ */
 public class GamePanel  extends JPanel implements ActionListener, KeyListener{
     public static final int windowX = 800;
     public static final int windowY = 600;
+    public Timer timer;
+    
     private final Dimension dim = new Dimension(windowX, windowY);
     private static final int fps = 50;
     private static final int initDelay = 1000;
-    public Timer timer;
     private boolean run = true;
     private Set<Integer> pressed = new HashSet<Integer>();
     private ArrayList<VPlayer> playerViews = new ArrayList<VPlayer>();
     private int frames = 0;
     private final int xpPerFrame = 1;
+    private final int refreshScorePerFrame = 15;
     private View view;
     private Game game;
     private boolean isWin  = false;
@@ -87,8 +98,9 @@ public class GamePanel  extends JPanel implements ActionListener, KeyListener{
         if(run && playerView.player.isLive()){
             playerView.x.add(newX);
             playerView.y.add(newY);
-            if(frames%5 == 0){
+            if(frames%refreshScorePerFrame == 0){
                 playerView.player.addXP(xpPerFrame);
+                //System.err.println("+++" + playerView.player.getName() + ", " + playerView.player.getXP());
                 view.refreshScoreBoard();
             }
         }else{

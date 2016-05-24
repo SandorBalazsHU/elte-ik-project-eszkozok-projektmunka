@@ -8,14 +8,15 @@ package hu.elte.project.intersection.view;
 import hu.elte.project.intersection.view.forms.PopUpWindow;
 import hu.elte.project.intersection.controll.Logger;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -26,24 +27,13 @@ import javax.swing.JLabel;
 A file leírása:
     Egy Swing abalak nyiása. A betöltést jelzi és a betöltő szál fogja bezárni!
 */
-public class LogoWindow extends JFrame{
+public class LogoPanel extends JPanel{
     public JProgressBar progressBar;
     private BufferedImage loadImage;
 
-        public LogoWindow(){
+        public LogoPanel(){
+        setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        //Ablak előkészítés
-        setTitle("Transport Company - Betöltés");
-        setLayout(new VerticalFlowLayout());
-        setSize(305, 329);
-        ImageIcon img = new ImageIcon("TempFiles/ViewImages/mainIcon.png");
-        setIconImage(img.getImage());
-        setLocation(200,100);
-        setResizable(false);
-        
-        //Kilépés
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
         //Kép betöltése - Ha nem található a kép a program tovább fut megjelenítés nélkül. Hiba logot hagy!
         try {loadImage = ImageIO.read(new File("TempFiles/viewImages/mainLogo.png"));
         } catch (IOException ex) {
@@ -52,10 +42,11 @@ public class LogoWindow extends JFrame{
         }
         JLabel image = new JLabel();  
         if(loadImage != null){image.setIcon(new ImageIcon(loadImage));}
+        image.setPreferredSize(new Dimension(305, 329));
         
         //Képet középrezárni átméretezés esetére és hozzáadni a Frame-hoz!
-        //image.setHorizontalAlignment(JLabel.CENTER);
-        //image.setVerticalAlignment(JLabel.CENTER);
+        image.setHorizontalAlignment(JLabel.CENTER);
+        image.setVerticalAlignment(JLabel.CENTER);
         
         image.setPreferredSize(new Dimension(300, 300));
         add(image);

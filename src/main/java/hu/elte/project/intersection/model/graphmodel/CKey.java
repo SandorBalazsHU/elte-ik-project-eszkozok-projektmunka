@@ -1,27 +1,60 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hu.elte.project.intersection.model.graphmodel;
 
 import java.awt.event.KeyEvent;
 
 /**
- *
- * @author sandorbalazs
+ *<h1> A vezérlőbillentyűk tárolására szolgál</h1>
+ * 
+ * @author  <b>Sándor Balázs</b> - <b>Bognár Dániel</b> - <b>Kiss Erik</b>
+ * @version 1.0
+ * @since   2016-05-03 
  */
 public class CKey {
+    
+    /**
+     * A baj billenytű
+     */
     public final int left;
+    
+    /**
+     * A job illentyú
+     */
     public final int right;
+    
+    /*
+    A billenytűombinávió neve.
+    */
     public final String name;
     
+    /**
+     * Az AD konbináció kódja
+     */
     public static final int AD = 0;
+    
+    /**
+     * Az JL konbináció kódja
+     */
     public static final int JL = 1;
+    
+    /**
+     * Az RZ konbináció kódja
+     */
     public static final int RZ = 2;
+    
+    /**
+     * Az VN konbináció kódja
+     */
     public static final int VN = 3;
+    
+    /**
+     * Az YC konbináció kódja
+     */
     public static final int YC = 4;
     
+    /**
+     * a KONSTRUKTOR
+     * @param c A ívánt billentyűpáros.
+     */
     public CKey(int c){
         switch(c){
             case 0:

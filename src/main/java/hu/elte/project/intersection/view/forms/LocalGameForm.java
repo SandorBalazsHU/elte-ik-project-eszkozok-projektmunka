@@ -71,7 +71,9 @@ public class LocalGameForm extends JPanel implements ActionListener{
             public void componentMoved(ComponentEvent e) {}
 
             @Override
-            public void componentShown(ComponentEvent e) {}
+            public void componentShown(ComponentEvent e){
+                PanelRepaint();
+            }
 
             @Override
             public void componentHidden(ComponentEvent e) {}
@@ -96,6 +98,8 @@ public class LocalGameForm extends JPanel implements ActionListener{
     }
     
     public JPanel generateGetUsersForm(int playersNumber){
+        setPlayerForms.clear();
+        getUsersForm.removeAll();
         getUsersForm.setLayout(new VerticalFlowLayout());
         
         for(int i = 0; i < playersNumber; ++i){
@@ -133,7 +137,7 @@ public class LocalGameForm extends JPanel implements ActionListener{
     }
     
     public void PanelRepaint() {
-        scrollFrameForGetUsersForm.setPreferredSize(new Dimension(parentFrame.getSize().width-35, parentFrame.getSize().height-130));
+        scrollFrameForGetUsersForm.setPreferredSize(new Dimension(parentFrame.getSize().width-70, parentFrame.getSize().height-140));
         scrollFrameForGetUsersForm.revalidate();
         scrollFrameForGetUsersForm.updateUI();
         scrollFrameForGetUsersForm.repaint();
