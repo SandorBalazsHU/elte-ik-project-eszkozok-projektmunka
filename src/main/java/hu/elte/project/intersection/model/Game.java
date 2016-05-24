@@ -25,4 +25,11 @@ public class Game {
     public Player getPlayer(int i){
         return players.get(i);
     }
+    public int livePlayers(){
+        int livePlayers = 0;
+        for (Player p : players) {
+            if(p.isLive()) ++livePlayers;
+        }
+        return livePlayers;
+    }
 }

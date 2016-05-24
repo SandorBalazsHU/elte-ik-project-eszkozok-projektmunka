@@ -37,7 +37,7 @@ public class PopUpWindow {
             System.exit(1);
             break;
             case QUESTION:
-                int confirm = JOptionPane.showOptionDialog(null, "Are You Sure to Close Application?", "Exit Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                int confirm = JOptionPane.showOptionDialog(null, "Valóban ki szeretnél lépni?", "Kilépés", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
                 answer = confirm == 0;
             break;
         }

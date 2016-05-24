@@ -8,7 +8,6 @@ package hu.elte.project.intersection.model.graphModel;
 import java.util.ArrayList;
 import hu.elte.project.intersection.model.Player;
 import hu.elte.project.intersection.view.GamePanel;
-import java.util.Random;
 import hu.elte.project.intersection.model.graphmodel.CKey;
 
 /**
@@ -25,20 +24,25 @@ public class VPlayer {
     public CKey controllKey;
     public double roll = 10.0d;
     public boolean isRemoteUser;
+    public int padding = 200;
     
     public VPlayer(Player player){
         this.player = player;
         this.isRemoteUser = player.isRemoteUser();
         this.controllKey = player.getControllKey();
         
-        Random rand = new Random();
-        int randomX = rand.nextInt(GamePanel.windowX);
-        int randomY = rand.nextInt(GamePanel.windowY);
+
+        int randomX = padding + (int)(Math.random() * (GamePanel.windowX-padding)-padding); 
+        int randomY = padding + (int)(Math.random() * (GamePanel.windowY-padding)-padding);
         x.add(randomX);
         randomX += r;
         x.add(randomX);
+        
         y.add(randomY);
         randomY +=r;
         y.add(randomY);
+        
+        int randomStartAlpha = 0 + (int)(Math.random() * 360);
+        alpha = randomStartAlpha;
     }
 }

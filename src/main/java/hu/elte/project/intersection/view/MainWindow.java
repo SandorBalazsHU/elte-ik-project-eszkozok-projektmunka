@@ -9,6 +9,7 @@ import hu.elte.project.intersection.controll.viewcontroll.View;
 import hu.elte.project.intersection.view.forms.LocalGameForm;
 import hu.elte.project.intersection.view.forms.ScoreBoard;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -42,7 +43,7 @@ private JPanel topPanel = new JPanel(new GridLayout(1,5));
     public GamePanel gamePanel;
     public LocalGameForm localGameForm;
     private final View view;
-    public ScoreBoard scoreBoardnew = new ScoreBoard();
+    public ScoreBoard scoreBoard = new ScoreBoard();
     
     public MainWindow(View view){
         this.view = view;
@@ -60,10 +61,11 @@ private JPanel topPanel = new JPanel(new GridLayout(1,5));
         setJMenuBar(createMenuBar());
         
         //(int top, int left, int bottom, int right)
-        scoreBoardnew.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-        leftPanel.add(scoreBoardnew);
+        scoreBoard.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        leftPanel.add(scoreBoard);
         
         gamePanel = new GamePanel();
+        gamePanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 5));
         gamePanel.setPreferredSize(new Dimension(800, 600));
         
         gamePanel.addKeyListener(gamePanel);

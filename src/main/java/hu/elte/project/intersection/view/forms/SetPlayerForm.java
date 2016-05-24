@@ -26,7 +26,7 @@ import javax.swing.event.ChangeListener;
  * @author sandorbalazs
  */
 class SetPlayerForm extends JPanel {
-    private JTextField playerNameField = new JTextField(20);
+    public JTextField playerNameField = new JTextField(20);
     private JColorChooser colorChooser = new JColorChooser(this.getForeground());
     
     public SetPlayerForm(int id) {
@@ -50,7 +50,7 @@ class SetPlayerForm extends JPanel {
     }
     
     public String getPlayerName(){
-        return playerNameField.getSelectedText();
+        return playerNameField.getText();
     }
     
     public Color getColor(){

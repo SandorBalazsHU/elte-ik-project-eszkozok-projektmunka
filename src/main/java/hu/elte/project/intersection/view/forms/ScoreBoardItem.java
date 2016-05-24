@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 /**
  *
@@ -21,17 +22,18 @@ public class ScoreBoardItem extends JPanel{
     private JLabel playerName;
     private JPanel playerColor;
     private JLabel playerKeys;
-    private JLabel playerXP;
+    protected JLabel playerXP;
     private JPanel box;
     
     public ScoreBoardItem(Player player) {
         setLayout(new VerticalFlowLayout());
-        setLayout(new FlowLayout(10));
         
-        playerName = new JLabel(player.getName());
+        playerName = new JLabel("  " + player.getName());
+        playerName.setFont(new Font("Plain", Font.BOLD, 16));
         add(playerName);
         
         box = new JPanel();
+        box.setLayout(new FlowLayout(20));
         
         playerColor = new JPanel();
         playerColor.setPreferredSize(new Dimension(20, 20));

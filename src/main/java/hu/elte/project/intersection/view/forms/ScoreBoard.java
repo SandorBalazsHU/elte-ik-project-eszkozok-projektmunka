@@ -7,9 +7,11 @@ package hu.elte.project.intersection.view.forms;
 
 import hu.elte.project.intersection.model.Game;
 import hu.elte.project.intersection.view.VerticalFlowLayout;
+import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -18,15 +20,33 @@ import javax.swing.JPanel;
 public class ScoreBoard extends JPanel{
     private final JLabel tittle  = new JLabel("Játékosok:");
     private ArrayList<ScoreBoardItem> items = new ArrayList<ScoreBoardItem>();
+    private Game game;
     
     public void init(Game game)
     {
+        this.game = game;
         setLayout(new VerticalFlowLayout());
+        tittle.setFont(new Font("Plain", Font.BOLD, 18));
+        tittle.setBorder(new EmptyBorder(10,10,10,10));
         add(tittle);
         for (int i = 0; i < game.getPlayersNumber(); ++i){
             ScoreBoardItem newScoreBoardItem = new ScoreBoardItem(game.getPlayer(i));
             items.add(newScoreBoardItem);
             add(newScoreBoardItem);
+        }
+    }
+    public void repaintME(){
+        
+        for (int i = 0; i < game.getPlayersNumber(); ++i){
+            items.get(i).playerXP = new JLabel(game.getPlayer(i).getXP() + " Pont");
+            
+            items.get(i).playerXP.revalidate();
+            items.get(i).playerXP.updateUI();
+            items.get(i).playerXP.repaint();
+            
+            items.get(i).revalidate();
+            items.get(i).updateUI();
+            items.get(i).repaint();
         }
     }
 }

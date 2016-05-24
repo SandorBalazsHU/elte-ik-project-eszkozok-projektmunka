@@ -11,6 +11,7 @@ import hu.elte.project.intersection.model.Player;
 import hu.elte.project.intersection.model.graphmodel.CKey;
 import hu.elte.project.intersection.view.LogoWindow;
 import hu.elte.project.intersection.view.MainWindow;
+import hu.elte.project.intersection.view.forms.PopUpWindow;
 import java.awt.Color;
 
 /**
@@ -78,6 +79,7 @@ public class View {
         initGame();
         startRound();
         mainWindow.localGameForm.setVisible(false);
+        mainWindow.scoreBoard.setVisible(true);
         mainWindow.gamePanel.setVisible(true);
         mainWindow.gamePanel.setFocusable(true);
         mainWindow.gamePanel.requestFocus();
@@ -86,8 +88,35 @@ public class View {
     public void startRound(){
         mainWindow.gamePanel.timer.start();
     }
+    public void stopRound(){
+        mainWindow.gamePanel.timer.stop();
+    }
     public void initGame(){
-        mainWindow.gamePanel.init(game);
-        mainWindow.scoreBoardnew.init(game);
+        mainWindow.gamePanel.init(game,this);
+        mainWindow.scoreBoard.init(game);
+    }
+    
+    public void refreshScoreBoard(){
+        mainWindow.scoreBoard.repaintME();
+        mainWindow.scoreBoard.revalidate();
+        mainWindow.scoreBoard.updateUI();
+        mainWindow.scoreBoard.repaint();
+    }
+    
+    public void win(Player winner){
+        stopRound();
+        
+        new PopUpWindow(PopUpWindow.COSTUM, "A nyertes: " + winner.getName());
+        
+        try {
+            Thread.sleep(2000);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+
+        game = new Game();
+        mainWindow.gamePanel.setVisible(false);
+        mainWindow.scoreBoard.removeAll();
+        mainWindow.scoreBoard.setVisible(false);
     }
 }

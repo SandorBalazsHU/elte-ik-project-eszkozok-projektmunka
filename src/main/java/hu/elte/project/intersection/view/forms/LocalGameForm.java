@@ -126,8 +126,7 @@ public class LocalGameForm extends JPanel implements ActionListener{
         }
         if(cmd.contains("start_game")){
             for (SetPlayerForm f : setPlayerForms) {
-                view.addPlayer(f.getName(), f.getColor(), false);
-                System.out.println(f.getName() + ", " + f.getColor());
+                view.addPlayer(f.playerNameField.getText(), f.getColor(), false);
             }
             view.startLocalGame();
         }

@@ -55,7 +55,7 @@ public class Player {
         return isLive;
     }
     
-    protected boolean addXP(int xp) {
+    public boolean addXP(int xp) {
         if(isLive){
             this.xp += xp;
             return true;
@@ -64,7 +64,7 @@ public class Player {
         }
     }
     
-    protected void kill(){
+    public void kill(){
         isLive = false;
     }
     

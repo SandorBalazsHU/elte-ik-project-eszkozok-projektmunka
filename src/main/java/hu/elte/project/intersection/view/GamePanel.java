@@ -1,5 +1,6 @@
 package hu.elte.project.intersection.view;
 
+import hu.elte.project.intersection.controll.viewcontroll.View;
 import hu.elte.project.intersection.model.Game;
 import hu.elte.project.intersection.model.graphModel.VPlayer;
 import hu.elte.project.intersection.model.graphmodel.CKey;
@@ -26,23 +27,36 @@ import javax.swing.Timer;
 public class GamePanel  extends JPanel implements ActionListener, KeyListener{
     public static final int windowX = 800;
     public static final int windowY = 600;
-    private Dimension dim = new Dimension(windowX, windowY);
-    
+    private final Dimension dim = new Dimension(windowX, windowY);
     private static final int fps = 50;
-    private static final int initDelay = 200;
-    
+    private static final int initDelay = 1000;
     public Timer timer;
     private boolean run = true;
-    private final Set<Integer> pressed = new HashSet<Integer>();
-    ArrayList<VPlayer> playerViews = new ArrayList<VPlayer>();
-    
+    private Set<Integer> pressed = new HashSet<Integer>();
+    private ArrayList<VPlayer> playerViews = new ArrayList<VPlayer>();
+    private int frames = 0;
+    private final int xpPerFrame = 1;
+    private View view;
+    private Game game;
+    private boolean isWin  = false;
+
     public GamePanel(){
         timer = new Timer(fps, this);
         timer.setInitialDelay(initDelay);
         setBackground(Color.DARK_GRAY); 
     }
     
-    public void init(Game game){
+    public void init(Game game, View view){
+        this.view = view;
+        this.game = game;
+        isWin = false;
+        frames = 0;
+        pressed = new HashSet<Integer>();
+        playerViews = new ArrayList<VPlayer>();
+        run = true;
+        timer = new Timer(fps, this);
+        timer.setInitialDelay(initDelay);  
+        
         for (int i = 0; i < game.getPlayersNumber(); ++i){
             playerViews.add(new VPlayer(game.getPlayer(i)));
         }
@@ -67,10 +81,22 @@ public class GamePanel  extends JPanel implements ActionListener, KeyListener{
         }
         service.shutdownNow();
         
-        if(newX > 0 && newY > 0 && newX < windowX && newY < windowY && run)
-        {
+        frames +=1;
+        
+        run = run && newX > 0 && newY > 0 && newX < windowX && newY < windowY;
+        if(run && playerView.player.isLive()){
             playerView.x.add(newX);
             playerView.y.add(newY);
+            if(frames%5 == 0){
+                playerView.player.addXP(xpPerFrame);
+                view.refreshScoreBoard();
+            }
+        }else{
+            playerView.player.kill();
+            if(game.livePlayers() == 0 && !isWin){
+                view.win(playerView.player);
+                isWin = true;
+            }
         }
     }
     
